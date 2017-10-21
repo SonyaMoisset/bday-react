@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Form, FormControl, Button } from 'react-bootstrap'
+
 import AgeStats from './AgeStats'
 import './App.css'
 
-class App extends Component {
+export default class App extends Component {
     constructor() {
         super()
 
@@ -12,6 +13,9 @@ class App extends Component {
             birthday: '',
             showStats: false
         }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     changeBirthday() {
@@ -21,6 +25,16 @@ class App extends Component {
         })
     }
 
+    handleChange(event) {
+        this.setState({
+            newDate: event.target.value
+        })
+    }
+
+    handleClick() {
+        this.changeBirthday()
+    }
+
     render() {
         return (
             <div className="App">
@@ -28,10 +42,10 @@ class App extends Component {
                     <h2>Input Your Birthday!</h2>
                     <FormControl
                         type="date"
-                    onChange={ event => this.setState({ newDate: event.target.value }) }>
+                        onChange={this.handleChange}>
                     </FormControl>
                     {' '}
-                    <Button onClick={ () => this.changeBirthday() }>
+                    <Button onClick={this.handleClick}>
                         Submit
                     </Button>
                     {
@@ -47,5 +61,3 @@ class App extends Component {
         )
     }
 }
-
-export default App
